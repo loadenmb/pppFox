@@ -1,0 +1,9 @@
+
+# dolphin
+**/.directory
+ 
+# firefox binary
+firefox/*
+
+# created firefox profiles
+identities/*
