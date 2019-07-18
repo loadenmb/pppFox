@@ -93,7 +93,7 @@ pppFox: search keyword or regular expression: test [0-9]{1,2}
 
 ### Delete identities / profiles
 ```shell
-# delete single profile (if profile name is set it's not delete from profile index = ./identities/identity_names.txt, manual remove line in file if wanted)
+# delete single profile
 ./deleteIdentity.sh 09ba510ca304850fd659aae4f1f4a8a0
 pppFox: continue to delete identity 09ba510ca304850fd659aae4f1f4a8a0? [y/n]:y
 
