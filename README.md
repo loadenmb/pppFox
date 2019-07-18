@@ -61,7 +61,7 @@ For desktop launch choose "execute in terminal" option for all scripts. (console
 ## Setup
 ```
 # clone from git
-git clone *** pppFox
+git clone https://github.com/loadenmb/pppFox.git
 
 cd pppFox/
 
