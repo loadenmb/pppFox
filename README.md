@@ -11,10 +11,28 @@ Fully portable to spoof identity (IP & MAC & useragent) where ever you go
 Buzzwords: Firefox portable, profile manager, spoof identity
 
 ## Usage
+```
+...
+usage:
+./newIdentity.sh --PROXY_IP [IP] --PROXY_PORT [PORT] --USERAGENT "[AGENT STRING]" --RANDOM_MAC [0|1]
+./newIdentity.sh -s [IP] -p [PORT] -a "[AGENT STRING]" -m [0|1]
+parameter:
+-s | --PROXY_IP                 proxy server ip
+-p | --PROXY_PORT               proxy server port
+-a | --USERAGENT                useragent
+-m | --RANDOM_MAC               generate random mac
+-h | --help                     display this
+configure default PROXY_IP, PROXY_PORT, USERAGENT, RANDOM_MAC (root required), INTERFACE in newIdentity.sh before launching
+...
+```
+### Create unique firefox identity / profile
+```shell
+./newIdentity.sh --PROXY_IP 127.0.0.1 --PROXY_PORT 2658 --USERAGENT "Mozilla/5.0 (X11; Linux x86_64;) Gecko/201101 Firefox/60.0" --RANDOM_MAC 1
+./newIdentity.sh -s 127.0.0.1 -p 2658 -m 0
+```
+### Create unique firefox profile with predefined proxy settings, random mac
 
-### Create identity / profile
-
-Configure PROXY_IP, PROXY_PORT, USERAGENT, RANDOM_MAC (root required), INTERFACE in newIdentity.sh before launching
+Configure default PROXY_IP, PROXY_PORT, USERAGENT, RANDOM_MAC (root required), INTERFACE in newIdentity.sh before launching
 ```shell
 ##
 ## <configuration>
@@ -29,9 +47,6 @@ INTERFACE="eth0" # network interface for mac change: eth0, wlan0
 ## </configuration>
 ##
 ```
-### Create private unique firefox profile
-
-Create private unique firefox profile with predefined proxy settings and random mac address
 ```shell
 ./newIdentity.sh
 ```
@@ -77,18 +92,19 @@ chmod +x ./*.sh
 
 ## Advanced usage
 
-### Search for identities / profiles
+### Search / list for identities / profiles
 ```shell
 # search all facebook related firefox profiles
-./searchIdentity *facebook*
+./searchIdentity.sh *facebook*
 
 # search profile with exact match
-./searchIdentity "johndoe mail"
+./searchIdentity.sh "johndoe mail"
 
-# search with assistant ;)
-./searchIdentity 
-pppFox: search keyword or regular expression: test [0-9]{1,2}
-
+# list / search with assistant ;)
+./searchIdentity.sh 
+pppFox: search keyword or regular expression (leave empty for list of identities):
+0a7d329f77835f94f01f408756c4ca4e johndoe mail
+cd43d18e9555b2f2a20a04b5f8e65032 facebook marketing
 ```
 
 ### Delete identities / profiles
@@ -114,7 +130,6 @@ rm -r ./identities/*
 
 
 ## Roadmap / TODO (feel free to work on)
-- add proxy + mac parameter, other script params?
 - add proxychains option?
 
 

@@ -12,14 +12,17 @@ CURRENT_DIR="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
 # ask for keyword / regex if no argument supplied
 if [ -z "$1" ]; then
     SEARCHGREPEX=""
-    while [ -z "$SEARCHGREPEX" ]; do
-        read -p "pppFox: search keyword or regular expression: " SEARCHGREPEX
-    done
+    read -p "pppFox: search keyword or regular expression (leave empty for list of identities): " SEARCHGREPEX
 else
     SEARCHGREPEX=$1
 fi
 
-# search with grep
-grep ${SEARCHGREPEX} "${CURRENT_DIR}/identities/identity_names.txt" 
+# list all identities if searchstring empty
+if [ -z "$SEARCHGREPEX" ]; then
+    cat "${CURRENT_DIR}/identities/identity_names.txt"
+else 
+    # search with grep
+    grep ${SEARCHGREPEX} "${CURRENT_DIR}/identities/identity_names.txt" 
+fi
 
 exit 0

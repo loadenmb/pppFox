@@ -20,7 +20,64 @@ INTERFACE="eth0" # network interface for mac change: eth0, wlan0
 
 
 echo "pppFox: private, portable, proxy firefox"
-echo "pppFox: configure PROXY_IP, PROXY_PORT, USERAGENT, RANDOM_MAC (root required), INTERFACE in newIdentity.sh before launching"
+
+function usage {
+    echo "usage:"
+    echo './newIdentity.sh --PROXY_IP [IP] --PROXY_PORT [PORT] --USERAGENT "[AGENT STRING]" --RANDOM_MAC [0|1]'
+    echo './newIdentity.sh -s [IP] -p [PORT] -a "[AGENT STRING]" -m [0|1]'
+    echo "parameter:"
+    echo "-s | --PROXY_IP                 proxy server ip"
+    echo "-p | --PROXY_PORT               proxy server port"
+    echo "-a | --USERAGENT                useragent"
+    echo "-m | --RANDOM_MAC               generate random mac"
+    echo "-h | --help                     display this"
+    echo "configure default PROXY_IP, PROXY_PORT, USERAGENT, RANDOM_MAC (root required), INTERFACE in newIdentity.sh before launching"
+    echo "examples":
+    echo './newIdentity.sh --PROXY_IP 127.0.0.1 --PROXY_PORT 2658 --USERAGENT "Mozilla/5.0 (X11; Linux x86_64;) Gecko/201101 Firefox/60.0" --RANDOM_MAC 1'
+    echo "./newIdentity.sh -s 127.0.0.1 -p 2658 -m 0"
+}
+
+# parse parameter, overwrite configuration
+POSITIONAL=()
+while [ $# -gt 0 ] 
+do
+    key="$1"
+    case $key in    
+        -h|--help)
+        usage;
+        exit 0;
+        shift # past argument
+        ;;
+        -s|--PROXY_IP)
+        PROXY_IP="$2"
+        shift # past argument
+        shift # past value
+        ;;
+        -p|--PROXY_PORT)
+        PROXY_PATH="$2"
+        shift 
+        shift
+        ;;
+        -a|--USERAGENT)
+        USERAGENT="$2"
+        shift
+        shift
+        ;;
+        -i|--INTERFACE)
+        INTERFACE="$2"
+        shift
+        shift
+        ;;
+        -m|--RANDOM_MAC)
+        RANDOM_MAC="$2"
+        shift # past argument
+        ;;
+        *)    # unknown option
+        POSITIONAL+=("$1") # save it in an array for later
+        shift # past argument
+        ;;
+    esac
+done
 
 # get current script path, resolve $SOURCE until the file is no longer a symlink
 SOURCE=${BASH_SOURCE[0]}
