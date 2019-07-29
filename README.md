@@ -30,6 +30,10 @@ configure default PROXY_IP, PROXY_PORT, USERAGENT, RANDOM_MAC (root required), I
 ./newIdentity.sh --PROXY_IP 127.0.0.1 --PROXY_PORT 2658 --USERAGENT "Mozilla/5.0 (X11; Linux x86_64;) Gecko/201101 Firefox/60.0" --RANDOM_MAC 1
 ./newIdentity.sh -s 127.0.0.1 -p 2658 -m 0
 ```
+Output is the new identity ID. (you need this id to load your profile again)
+```
+pppFox: new identity: c4f11767db0bf2ab5b11e2917a7073f1
+```
 ### Create unique firefox profile with predefined proxy settings, random mac
 
 Configure default PROXY_IP, PROXY_PORT, USERAGENT, RANDOM_MAC (root required), INTERFACE in newIdentity.sh before launching
@@ -47,6 +51,7 @@ INTERFACE="eth0" # network interface for mac change: eth0, wlan0
 ## </configuration>
 ##
 ```
+Use it:
 ```shell
 ./newIdentity.sh
 ```
