@@ -10,6 +10,8 @@ Fully portable to spoof identity (IP & MAC & useragent) where ever you go
 
 Buzzwords: Firefox portable, profile manager, spoof identity
 
+[https://github.com/loadenmb/pppFox](https://github.com/loadenmb/pppFox)
+
 ## Usage
 ```
 ...
@@ -137,6 +139,11 @@ rm -r ./identities/*
 ## Roadmap / TODO (feel free to work on)
 - add proxychains option?
 
+## Contribute
+
+Discuss features, report issues, questions -> [here](https://github.com/loadenmb/pppFox/issues).
+
+Developer -> fork & pull ;)
 
 ## Related
 - [Proxy list](https://www.google.com/search?q=proxy+list)    
