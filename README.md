@@ -66,7 +66,7 @@ examples:
 For desktop launch choose "execute in terminal" option for all scripts. (console input is expected)
 
 ## Setup
-```
+```shell
 # clone from git
 git clone https://github.com/loadenmb/pppFox.git
 
@@ -100,7 +100,7 @@ cd43d18e9555b2f2a20a04b5f8e65032 facebook marketing
 ```
 
 ### Delete identities / profiles
-```
+```shell
 # delete single profile
 ./deleteIdentity.sh 09ba510ca304850fd659aae4f1f4a8a0
 pppFox: continue to delete identity 09ba510ca304850fd659aae4f1f4a8a0? [y/n]:y
