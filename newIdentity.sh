@@ -8,8 +8,8 @@
 ##
 ## <configuration>
 ##
-PROXY_IP="212.62.95.45"
-PROXY_PORT="1080"
+PROXY_IP=""
+PROXY_PORT="8080"
 RANDOM_MAC=1 # 1 = mac change enabled (root required), 0 = mac change disabled
 
 USERAGENT="Mozilla/5.0 (X11; Linux x86_64; rv:60.0) Gecko/20100101 Firefox/60.0"
@@ -148,13 +148,15 @@ echo "${MAC_CURRENT}" >> "${PROFILE_DIR}/mac_address.txt"
 echo "user_pref(\"useragent.override\", \"${USERAGENT}\");" >> "${PROFILE_DIR}/user.js"
 echo "pppFox: useragent: ${USERAGENT}"
 
-# set proxy settings
-echo "user_pref(\"network.proxy.share_proxy_settings\", true);" >> "${PROFILE_DIR}/user.js"
-echo "user_pref(\"network.proxy.type\", 1);" >> "${PROFILE_DIR}/user.js"
-echo "user_pref(\"network.proxy.http\", \"${PROXY_IP}\");" >> "${PROFILE_DIR}/user.js"
-echo "user_pref(\"network.proxy.http_port\", ${PROXY_PORT});" >> "${PROFILE_DIR}/user.js"
-echo "pppFox: proxy settings: ${PROXY_IP}:${PROXY_PORT}"
-
+# set proxy settings if proxy IP available
+if [ ! -z "$PROXY_IP" ]; then
+    echo "user_pref(\"network.proxy.share_proxy_settings\", true);" >> "${PROFILE_DIR}/user.js"
+    echo "user_pref(\"network.proxy.type\", 1);" >> "${PROFILE_DIR}/user.js"
+    echo "user_pref(\"network.proxy.http\", \"${PROXY_IP}\");" >> "${PROFILE_DIR}/user.js"
+    echo "user_pref(\"network.proxy.http_port\", ${PROXY_PORT});" >> "${PROFILE_DIR}/user.js"
+    echo "pppFox: proxy settings: ${PROXY_IP}:${PROXY_PORT}"
+fi
+    
 # start firefox with pre-prepared profile
 echo "pppFox: launching firefox..."
 "${PWD}/firefox/firefox" -no-remote -profile "${PROFILE_DIR}"

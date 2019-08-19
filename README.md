@@ -137,7 +137,8 @@ rm -r ./identities/*
 
 
 ## Roadmap / TODO (feel free to work on)
-- add proxychains option?
+- add socks option (http/s proxy only at the moment)
+- maybe add proxychains option?
 
 ## Contribute
 
@@ -148,3 +149,6 @@ Developer -> fork & pull ;)
 ## Related
 - [Proxy list](https://www.google.com/search?q=proxy+list)    
 - [Firefox releases](http://releases.mozilla.org/pub/firefox/releases/)
+- User agent lists:
+    - [myip.ms](https://myip.ms/browse/comp_browseragents/Computer_Browser_Agents.html)
+    - [whatismybrowser.com](https://developers.whatismybrowser.com/useragents/explore/)
