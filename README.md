@@ -100,7 +100,7 @@ cd43d18e9555b2f2a20a04b5f8e65032 facebook marketing
 ```
 
 ### Delete identities / profiles
-```shell
+```
 # delete single profile
 ./deleteIdentity.sh 09ba510ca304850fd659aae4f1f4a8a0
 pppFox: continue to delete identity 09ba510ca304850fd659aae4f1f4a8a0? [y/n]:y
@@ -112,7 +112,7 @@ rm -r ./identities/*
 ### Default configuration
 
 Configure default PROXY_IP, PROXY_PORT, USERAGENT, RANDOM_MAC (root required), INTERFACE in newIdentity.sh.
-```shell
+```
 ##
 ## <configuration>
 ##
@@ -125,7 +125,7 @@ INTERFACE="eth0" # network interface for mac change: eth0, wlan0
 ##
 ## </configuration>
 ##
-
+```
 ## Details
 | What                                                       |  Value         | 
 | ---------------------------------------------------------- | -------------- |
