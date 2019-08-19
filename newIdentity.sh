@@ -116,7 +116,7 @@ else
     # get mac address to store in profile later
     MAC_CURRENT=$(cat /sys/class/net/${INTERFACE}/address)
 fi 
-echo "pppFox: mac address: ${MAC_CURRENT}"
+echo "pppFox: mac address: ${MAC_CURRENT} @ ${INTERFACE}"
 
 # create unique random profile
 PROFILE=$(cat /dev/urandom | tr -cd 'a-f0-9' | head -c 32)
