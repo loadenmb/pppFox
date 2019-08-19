@@ -18,7 +18,6 @@ INTERFACE="eth0" # network interface for mac change: eth0, wlan0
 ## </configuration>
 ##
 
-
 echo "pppFox: private, portable, proxy firefox"
 
 function usage {
@@ -27,14 +26,16 @@ function usage {
     echo './newIdentity.sh -s [IP] -p [PORT] -a "[AGENT STRING]" -m [0|1]'
     echo "parameter:"
     echo "-s | --PROXY_IP                 proxy server ip"
-    echo "-p | --PROXY_PORT               proxy server port"
+    echo "-p | --PROXY_PORT               proxy server port, default: 8080"
     echo "-a | --USERAGENT                useragent"
     echo "-m | --RANDOM_MAC               generate random mac"
+    echo "-i | --INTERFACE                overwrite network interface, default: eth0"
     echo "-h | --help                     display this"
     echo "configure default PROXY_IP, PROXY_PORT, USERAGENT, RANDOM_MAC (root required), INTERFACE in newIdentity.sh before launching"
     echo "examples":
-    echo './newIdentity.sh --PROXY_IP 127.0.0.1 --PROXY_PORT 2658 --USERAGENT "Mozilla/5.0 (X11; Linux x86_64;) Gecko/201101 Firefox/60.0" --RANDOM_MAC 1'
+    echo './newIdentity.sh --PROXY_IP 127.0.0.1 --PROXY_PORT 2658 --USERAGENT "Mozilla/5.0 (inux x86_64;) Gecko/201101"'
     echo "./newIdentity.sh -s 127.0.0.1 -p 2658 -m 0"
+    echo './newIdentity.sh -s 127.0.0.1 -p 8080 -a "Mozilla/5.0 (X11; Linux x86_64;) Gecko/201101 Firefox/60.0"'
 }
 
 # parse parameter, overwrite configuration
@@ -70,10 +71,10 @@ do
         ;;
         -m|--RANDOM_MAC)
         RANDOM_MAC="$2"
-        shift # past argument
+        shift
+        shift
         ;;
         *)    # unknown option
-        POSITIONAL+=("$1") # save it in an array for later
         shift # past argument
         ;;
     esac
@@ -91,23 +92,18 @@ PWD="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
 # change mac adress (RANDOM_MAC = 1)
 if [ $RANDOM_MAC = 1 ]; then
 
-    # generate random mac and try to set until mac change success
+    # generate random mac, try to set mac on interface
     function changeMac {
-        MAC_DEFAULT=$1;
-        INTERFACE=$2;
+        INTERFACE=$1;
         MAC_TMP=$(cat /dev/urandom | head -c 32 | md5sum | sed 's/^\(..\)\(..\)\(..\)\(..\)\(..\).*$/02:\1:\2:\3:\4:\5/')
-        MAC_CURRENT=$(cat /sys/class/net/${INTERFACE}/address)
-        while [ $MAC_DEFAULT = $MAC_CURRENT ]; do
-            ip link set dev ${INTERFACE} down
-            ip link set dev ${INTERFACE} address ${MAC_TMP}
-            sleep 1;
-            ip link set dev ${INTERFACE} up            
-            MAC_CURRENT=$(cat /sys/class/net/${INTERFACE}/address)
-        done
+        ip link set dev ${INTERFACE} down
+        ip link set dev ${INTERFACE} address ${MAC_TMP}
+        sleep 1;
+        ip link set dev ${INTERFACE} up            
     }
     echo "pppFox: root permissions required for temporary mac address change (leave empty to abort)"
     MAC_DEFAULT=$(cat /sys/class/net/${INTERFACE}/address)
-    su -c "$(declare -f changeMac); changeMac ${MAC_DEFAULT} ${INTERFACE}"
+    su -c "$(declare -f changeMac); changeMac ${INTERFACE}"
     MAC_CURRENT=$(cat /sys/class/net/${INTERFACE}/address)
     if  [ $MAC_DEFAULT = $MAC_CURRENT ]; then
         echo "pppFox: can not change mac address. maybe wrong root password or set RANDOM_MAC=0"
@@ -143,6 +139,9 @@ cp "${PWD}/var/user.js" "${PROFILE_DIR}"
 
 # get / save mac address to firefox profile folder
 echo "${MAC_CURRENT}" >> "${PROFILE_DIR}/mac_address.txt"
+
+# save network interface, required for mac change
+echo "${INTERFACE}" >> "${PROFILE_DIR}/interface.txt"
 
 # set useragent string
 echo "user_pref(\"useragent.override\", \"${USERAGENT}\");" >> "${PROFILE_DIR}/user.js"
