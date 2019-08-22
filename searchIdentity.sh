@@ -19,10 +19,10 @@ fi
 
 # list all identities if searchstring empty
 if [ -z "$SEARCHGREPEX" ]; then
-    cat "${CURRENT_DIR}/identities/identity_names.txt"
+    cat -n "${CURRENT_DIR}/identities/identity_names.txt"
 else 
     # search with grep
-    grep ${SEARCHGREPEX} "${CURRENT_DIR}/identities/identity_names.txt" 
+    cat -n "${CURRENT_DIR}/identities/identity_names.txt" | grep -i ${SEARCHGREPEX} 
 fi
 
 exit 0

@@ -36,6 +36,11 @@ while [ -h "$SOURCE" ]; do
 done
 PWD="$(cd -P "$(dirname "$SOURCE")" >/dev/null 2>&1 && pwd)"
 
+# load profile by line number if script argument is integer
+if [[ $PROFILE =~ ^[0-9]+$ ]]; then
+    PROFILE=$(sed "${PROFILE}!d" "${PWD}/identities/identity_names.txt" | cut -d " " -f1)
+fi
+
 # check if profile available
 PROFILE_DIR="${PWD}/identities/${PROFILE}"
 if [ ! -d "$PROFILE_DIR" ]; then
