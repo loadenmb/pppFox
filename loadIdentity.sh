@@ -17,14 +17,15 @@ echo "pppFox: private, portable, proxy firefox"
 
 function usage {
     echo "usage:"
-    echo './loadIdentity.sh --INTERFACE [INTERFACE] --RANDOM_MAC [0|1]'
-    echo './loadIdentity.sh -m [0|1] -i [INTERFACE]'
+    echo './loadIdentity.sh --INTERFACE [INTERFACE] --RANDOM_MAC [0|1] [IDENTITY]'
+    echo './loadIdentity.sh [IDENTITY] -m [0|1] -i [INTERFACE]'
     echo "parameter:"
     echo "-m | --RANDOM_MAC               overwrite load random mac on / off"
     echo "-i | --INTERFACE                overwrite network interface, default: eth0"
     echo "-h | --help                     display this"
     echo "examples":
     echo './loadIdentity.sh c4f11767db0bf2ab5b11e2917a7073f1            # load idenity like defined'
+    echo './loadIdentity.sh 5                                           # load by line number from searchIdentity.sh'
     echo './loadIdentity.sh                                             # will ask for identity string'
     echo './loadIdentity.sh c4f11... --INTERFACE wlan0 --RANDOM_MAC 1   # change mac on interface'
     echo './loadIdentity.sh -m 0  9b41499a51a31ecbac215a8ce0b1fb63      # without mac change'

@@ -54,6 +54,7 @@ parameter:
 -h | --help                     display this
 examples:
 ./loadIdentity.sh c4f11767db0bf2ab5b11e2917a7073f1            # load idenity like defined
+./loadIdentity.sh 5                                           # load by line number from searchIdentity.sh'
 ./loadIdentity.sh                                             # will ask for identity string
 ./loadIdentity.sh c4f11... --INTERFACE wlan0 --RANDOM_MAC 1   # change mac on interface
 ./loadIdentity.sh -m 0  9b41499a51a31ecbac215a8ce0b1fb63      # without mac change
@@ -95,8 +96,8 @@ chmod +x ./*.sh
 # list / search with assistant ;)
 ./searchIdentity.sh 
 pppFox: search keyword or regular expression (leave empty for list of identities):
-0a7d329f77835f94f01f408756c4ca4e johndoe mail
-cd43d18e9555b2f2a20a04b5f8e65032 facebook marketing
+     1  0a7d329f77835f94f01f408756c4ca4e johndoe mail
+     2  cd43d18e9555b2f2a20a04b5f8e65032 facebook marketing
 ```
 
 ### Delete identities / profiles
