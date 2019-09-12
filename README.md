@@ -53,8 +53,8 @@ parameter:
 -i | --INTERFACE                overwrite network interface, default: eth0
 -h | --help                     display this
 examples:
-./loadIdentity.sh c4f11767db0bf2ab5b11e2917a7073f1            # load idenity like defined
-./loadIdentity.sh 5                                           # load by line number from searchIdentity.sh'
+./loadIdentity.sh c4f11767db0bf2ab5b11e2917a7073f1            # load identity like defined
+./loadIdentity.sh 5                                           # load by line number from searchIdentity.sh
 ./loadIdentity.sh                                             # will ask for identity string
 ./loadIdentity.sh c4f11... --INTERFACE wlan0 --RANDOM_MAC 1   # change mac on interface
 ./loadIdentity.sh -m 0  9b41499a51a31ecbac215a8ce0b1fb63      # without mac change
@@ -139,10 +139,13 @@ INTERFACE="eth0" # network interface for mac change: eth0, wlan0
 | firefox proxy and useragent settings are inserted at:      | ./identities/[0-9a-f]{32}/user.js |
 | identity / profile names stored at:                        | ./identities/identity_names.txt |
 
-
-## Roadmap / TODO (feel free to work on)
-- add socks option (http/s proxy only at the moment)
-- maybe add proxychains option?
+Firefox options set by script:
+- network.proxy.type
+- network.proxy.share_proxy_settings
+- network.proxy.socks_remote_dns
+- network.proxy.http_port
+- network.proxy.http
+- useragent.override
 
 ## Contribute
 
@@ -156,3 +159,5 @@ Developer -> fork & pull ;)
 - User agent lists:
     - [myip.ms](https://myip.ms/browse/comp_browseragents/Computer_Browser_Agents.html)
     - [whatismybrowser.com](https://developers.whatismybrowser.com/useragents/explore/)
+- [Proxychains - force TCP app to use one or more proxy server](https://github.com/haad/proxychains)
+

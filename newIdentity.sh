@@ -153,6 +153,7 @@ if [ ! -z "$PROXY_IP" ]; then
     echo "user_pref(\"network.proxy.type\", 1);" >> "${PROFILE_DIR}/user.js"
     echo "user_pref(\"network.proxy.http\", \"${PROXY_IP}\");" >> "${PROFILE_DIR}/user.js"
     echo "user_pref(\"network.proxy.http_port\", ${PROXY_PORT});" >> "${PROFILE_DIR}/user.js"
+    echo "user_pref(\"network.proxy.socks_remote_dns\", 1);" >> "${PROFILE_DIR}/user.js"
     echo "pppFox: proxy settings: ${PROXY_IP}:${PROXY_PORT}"
 fi
     
